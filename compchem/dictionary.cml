@@ -3,9 +3,10 @@
 <dictionary
         xmlns="http://www.xml-cml.org/schema"
         xmlns:h="http://www.w3.org/1999/xhtml"
-        xmlns:cmlx="http://www.xml-cml.org/schema/cmlx"
         xmlns:convention="http://www.xml-cml.org/convention/"
         xmlns:unitType="http://www.xml-cml.org/unit/unitType/"
+        xmlns:nonsi="http://www.xml-cml.org/unit/nonSi/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         convention="convention:dictionary"
         title="Computational chemistry concepts - CompChem concepts"
         namespace="http://www.xml-cml.org/dictionary/compchem/"
@@ -21,6 +22,10 @@
         </h:p>
     </description>
     <dc:author>Weerapong Phadungsukanan</dc:author>
+    <dc:author>Peter Murray-Rust</dc:author>
+    <dc:author>Sam Adams</dc:author>
+
+    <!-- Terms for compchem modules -->
 
     <entry id="jobList" term="job list" unitType="unitType:none">
         <definition>
@@ -30,81 +35,426 @@
             <h:p>
                 A quantum chemistry calculation is often comprised of a series of subtasks,
                 <h:i>e.g.</h:i> coarse optimisation -> fine optimisation -> NMR Spectrum Analysis; this is
-        because most quantum chemistry software packages are designed to be
-        modularised and only to perform a single task at a time. The joblist concept
-        is introduced to capture these series of successive subtasks and links
-        the information from one subtask to the next subtask.
-    </h:p>
-</description>
-</entry>
+                because most quantum chemistry software packages are designed to be
+                modularised and only to perform a single task at a time. The joblist concept
+                is introduced to capture these series of successive subtasks and links
+                the information from one subtask to the next subtask.
+            </h:p>
+        </description>
+    </entry>
 
-<entry id="job" term="job" unitType="unitType:none">
-    <definition>
-        <h:p>A job or computational task</h:p>
-    </definition>
-    <description>
-        <h:p>
-            The job concept represents a computational job performed by quantum chemistry
-            software, e.g. geometry optimisation job, frequency analysis job. The job
-            concept is the smallest unit which can fully describe a general picture of
-            computational modelling.
-        </h:p>
-    </description>
-</entry>
+    <entry id="job" term="job" unitType="unitType:none">
+        <definition>
+            <h:p>A job or computational task</h:p>
+        </definition>
+        <description>
+            <h:p>
+                The job concept represents a computational job performed by quantum chemistry
+                software, e.g. geometry optimisation job, frequency analysis job. The job
+                concept is the smallest unit which can fully describe a general picture of
+                computational modelling.
+            </h:p>
+        </description>
+    </entry>
 
-<entry id="initialization" term="initialization" unitType="unitType:none">
-    <definition>
-        <h:p>A initialisation module for a computational job</h:p>
-    </definition>
-    <description>
-        <h:p>
-            An initialisation module represents the concept of the model parameters and
-            inputs for computational job.
-        </h:p>
-    </description>
-</entry>
+    <entry id="initialization" term="initialization" unitType="unitType:none">
+        <definition>
+            <h:p>A initialisation module for a computational job</h:p>
+        </definition>
+        <description>
+            <h:p>
+                An initialisation module represents the concept of the model parameters and
+                inputs for computational job.
+            </h:p>
+        </description>
+    </entry>
 
-<entry id="calculation" term="calculation" unitType="unitType:none">
-    <definition>
-        <h:p>A calculation module for a computational job</h:p>
-    </definition>
-    <description>
-        <h:p>
-            A calculation module represents the concept of the model calculation or
-            optimisation or iteration processes for computational job.
-        </h:p>
-    </description>
-</entry>
+    <entry id="calculation" term="calculation" unitType="unitType:none">
+        <definition>
+            <h:p>A calculation module for a computational job</h:p>
+        </definition>
+        <description>
+            <h:p>
+                A calculation module represents the concept of the model calculation or
+                optimisation or iteration processes for computational job.
+            </h:p>
+        </description>
+    </entry>
 
-<entry id="finalization" term="finalization" unitType="unitType:none">
-    <definition>
-        <h:p>A finalization module for a computational job</h:p>
-    </definition>
-    <description>
-        <h:p>
-            A finalisation module represents the concept of the model results for
-            computational job.
-        </h:p>
-    </description>
-</entry>
+    <entry id="finalization" term="finalization" unitType="unitType:none">
+        <definition>
+            <h:p>A finalization module for a computational job</h:p>
+        </definition>
+        <description>
+            <h:p>
+                A finalisation module represents the concept of the model results for
+                computational job.
+            </h:p>
+        </description>
+    </entry>
 
-<entry id="environment" term="environment" unitType="unitType:none">
-    <definition>
-        <h:p>Module holding concepts relating to environment that the job used or required</h:p>
-    </definition>
-    <description>
-        <h:p>
-            The computing environment concept refers to a hardware platform, software application, 
-            the operating system and any hardware and software configurations used in order to run 
-            the job or computational task. The environment also includes the metadata such as 
-            machine id, username, starting and finishing date time, tools, compilers, IP, etc.
-        </h:p>
-        <h:p>   
-            This information is not related to input and output of the model but is supplementary to 
-            the software application to run properly and may vary from machine to machine. 
-            Therefore, the computing environment is OPTIONAL element in the CompChem convention.
-        </h:p>
-    </description>
-</entry>
+    <entry id="environment" term="environment" unitType="unitType:none">
+        <definition>
+            <h:p>Module holding concepts relating to environment that the job used or required</h:p>
+        </definition>
+        <description>
+            <h:p>
+                The computing environment concept refers to a hardware platform, software application,
+                the operating system and any hardware and software configurations used in order to run
+                the job or computational task. The environment also includes the metadata such as
+                machine id, username, starting and finishing date time, tools, compilers, IP, etc.
+            </h:p>
+            <h:p>
+                This information is not related to input and output of the model but is supplementary to
+                the software application to run properly and may vary from machine to machine.
+                Therefore, the computing environment is OPTIONAL element in the CompChem convention.
+            </h:p>
+        </description>
+    </entry>
+
+
+
+    <!-- terms for properties / parameters -->
+
+    <entry id="hostname" term="the hostname" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The hostname of the machine on which a job was run.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>GINC-DEEPTHOUGHT
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="jobname" term="the name of the job" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The name of a job.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>WWW-DATA
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="date" term="a date" dataType="xsd:date" unitType="unitType:none">
+        <definition>
+            <h:p>
+                A date associated with a job.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>2006-11-20T00:00:00Z
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="title" term="title of the job" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The title of a job.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>CH4
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="run.date" term="date the job was run" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The date a job was run.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>20-Nov-2006
+            </h:p>
+        </description>
+    </entry>
+
+
+
+
+    <entry id="program" term="name of program" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The name of the program used to perform a calculation.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>Gaussian 03
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="program.date" term="date of program release" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The date the program used to perform a calculation was released.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>2-Jun-2003
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="version" term="version of the program" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The version of the program used to perform a calculation.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>x86-Linux-G03RevB.04
+            </h:p>
+        </description>
+    </entry>
+
+
+
+    <entry id="method" term="method or functional" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The method or functional for a calculation.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>RB3LYP
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="basis" term="name of basis set" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The name of the basis set used for a calculation.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>6-31G(d)
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="basiscount" term="number of basis functions" dataType="xsd:integer" unitType="unitType:dimesnsionless">
+        <definition>
+            <h:p>
+                The number of basis functions in a calculation.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>23
+            </h:p>
+        </description>
+    </entry>
+
+
+
+    <entry id="formula" term="compostional formula" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The compositional formula of a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>CH4
+            </h:p>
+            <h:p>
+                <h:i>Should this be a CML formula?</h:i>
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="nactiveatoms" term="number of active atoms" dataType="xsd:integer" unitType="unitType:dimesnsionless">
+        <definition>
+            <h:p>
+                The number of active (unconstrained) atoms in a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>5
+            </h:p>
+        </description>
+    </entry>
+
+
+    <entry id="natoms" term="total number of atoms" dataType="xsd:integer" unitType="unitType:dimesnsionless">
+        <definition>
+            <h:p>
+                The total number of atoms in a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>5
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="alphae" term="number of alpha electrons" dataType="xsd:integer" unitType="unitType:dimesnsionless">
+        <definition>
+            <h:p>
+                The number of alpha electrons in a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>5
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="betae" term="number of beta electrons" dataType="xsd:integer" unitType="unitType:dimesnsionless">
+        <definition>
+            <h:p>
+                The number of beta electrons in a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>5
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="degfreedom" term="number of degrees of freedom" dataType="xsd:integer" unitType="unitType:dimesnsionless">
+        <definition>
+            <h:p>
+                The number of degrees of freedom of a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>1
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="diffuse" term="diffuse basis settings" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The diffuse basis settings for a calculation.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>(6D, 7F)
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="frameworkgroup" term="framework group" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The framework group for a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>TD[O(C),4C3(H)]
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="pointgroup" term="point group" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The point group for a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>TD
+            </h:p>
+        </description>
+    </entry>
+
+
+
+    <entry id="dipole" term="dipole moment" unitType="unitType:electric_dipole_moment">
+        <definition>
+            <h:p>
+                The dipole moment of a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b><![CDATA[ <array dataType="xsd:double" units="nonsi:debye" size="3" delimiter="|">|0.0|0.0|0.0|</array> ]]>
+            </h:p>
+            <h:p>
+                <h:i>Should this be a vector3?</h:i>
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="electronicstate" term="electronic state" dataType="xsd:string" unitType="unitType:none">
+        <definition>
+            <h:p>
+                The electronic state of a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>1-A1
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="hfenergy" term="hartree-fock energy" dataType="xsd:double" unitType="unitType:energy" units="nonsi:hartree">
+        <definition>
+            <h:p>
+                The calculated hartree-fock energy of a molecule.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>-40.5183892
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="rmsd" term="root mean square of final iteration" dataType="xsd:double" units="nonsi:unknown">
+        <definition>
+            <h:p>
+                The root mean square deviation of the final iteration of a calculation.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>2.782E-9
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="rmsf" term="root mean square residual force" dataType="xsd:double" units="nonsi:unknown">
+        <definition>
+            <h:p>
+                The root mean square residual force for the final iteration of a calculation.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b> 8.238E-8
+            </h:p>
+        </description>
+    </entry>
 
 </dictionary>
