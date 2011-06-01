@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="../../style/dictionary.xsl" type="text/xsl"?>
+<dictionary
+        xmlns="http://www.xml-cml.org/schema"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns:cmlx="http://www.xml-cml.org/schema/cmlx"
+        xmlns:convention="http://www.xml-cml.org/convention/"
+        xmlns:unitType="http://www.xml-cml.org/unit/unitType/"
+        convention="convention:dictionary"
+        title="Computational chemistry concepts - Gaussian concepts"
+        namespace="http://www.xml-cml.org/dictionary/gaussian/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        dictionaryPrefix="gaussian">
+
+    <description>
+        <h:p>Dictionary for Gaussian software terms</h:p>
+        <h:p>
+            Concepts in this dictionary are specific to the Gaussian computational
+            chemistry package.
+        </h:p>
+    </description>
+
+    <dc:author>Peter Murray-Rust</dc:author>
+    <dc:author>Sam Adams</dc:author>
+
+    <entry id="operation" term="operation to be carried out" dataType="xsd:string">
+        <definition>
+            <h:p>
+                The operation to be carried out during a job.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>FOpt
+            </h:p>
+        </description>
+    </entry>
+
+    <entry id="keyword" term="program-specific keyword" dataType="xsd:string">
+        <definition>
+            <h:p>
+                A program-specific keyword.
+            </h:p>
+        </definition>
+        <description>
+            <h:p class="example">
+                <h:b>examples: </h:b>#N
+            </h:p>
+        </description>
+    </entry>
+
+</dictionary>
